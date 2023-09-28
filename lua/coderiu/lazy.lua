@@ -12,17 +12,25 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+
+	--Theme
 	{ 'rose-pine/neovim' },
-	
+
+	--Lua line
+	{ 'nvim-lualine/lualine.nvim' },
+
+	--Show keybindings
 	{ 'folke/which-key.nvim' },
 
+	--Autopairs
 	{
 		'windwp/nvim-autopairs',
 		dependencies = { 'hrsh7th/nvim-cmp'},
 	},
-	
+
+	--Telescope + fuzzy finder
 	{
-		'nvim-telescope/telescope.nvim', 
+		'nvim-telescope/telescope.nvim',
 		tag = '0.1.2',
 		dependencies = {
 			'nvim-lua/plenary.nvim',
@@ -35,6 +43,40 @@ require("lazy").setup({
 			},
 
 		},
-	}
-	
+	},
+
+	--Treesitter
+	{
+		'nvim-treesitter/nvim-treesitter',
+		build = ':TSUpdate'
+	},
+
+	--LSP
+	{
+		'neovim/nvim-lspconfig',
+		dependencies = {
+			{ 'williamboman/mason.nvim', config = true },
+			'williamboman/mason-lspconfig.nvim',
+			{ 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+			'folke/neodev.nvim',
+		},
+	},
+
+	--Autocompletion
+	{
+		'hrsh7th/nvim-cmp',
+		dependencies = {
+			'L3MON4D3/LuaSnip',
+			'saadparwaiz1/cmp_luasnip',
+			'hrsh7th/cmp-nvim-lsp',
+			'rafamadriz/friendly-snippets',
+
+		},
+ 	},
+
+	--Fugitive (pentru git tati)
+	{ 'tpope/vim-fugitive' },
+
+	--Harpoon
+	{ 'theprimeagen/harpoon' }
 })
