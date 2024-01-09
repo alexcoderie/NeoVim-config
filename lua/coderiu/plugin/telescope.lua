@@ -1,3 +1,6 @@
+require('telescope').setup { defaults = {}, pickers = { find_files = { disable_devicons = false },}, }
+pcall(require('telescope').load_extension, 'fzf')
+
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>sf', builtin.find_files, {desc = '[S]earch [F]iles'})
 vim.keymap.set('n', '<leader>?', builtin.oldfiles, {desc = '[?] Find recently opened files'})

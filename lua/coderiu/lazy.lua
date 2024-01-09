@@ -16,6 +16,9 @@ require("lazy").setup({
 	--Theme
 	{ 'rose-pine/neovim' },
 
+    --Icons    
+    {'nvim-tree/nvim-web-devicons'},
+
 	--Lua line
 	{ 'nvim-lualine/lualine.nvim' },
 
@@ -66,7 +69,7 @@ require("lazy").setup({
 	{
 		'hrsh7th/nvim-cmp',
 		dependencies = {
-			'L3MON4D3/LuaSnip',
+			{'L3MON4D3/LuaSnip', version = "v2.*", build = "make install_jsregexp"},
 			'saadparwaiz1/cmp_luasnip',
 			'hrsh7th/cmp-nvim-lsp',
 			'rafamadriz/friendly-snippets',
@@ -78,5 +81,11 @@ require("lazy").setup({
 	{ 'tpope/vim-fugitive' },
 
 	--Harpoon
-	{ 'theprimeagen/harpoon' }
+	{ 'theprimeagen/harpoon' },
+
+	--Undotree
+	{ 'mbbill/undotree' },
+
+	--Comment
+	{ 'numToStr/Comment.nvim', opts = {} }
 })
