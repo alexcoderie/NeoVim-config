@@ -75,7 +75,7 @@ require("lazy").setup({
 			'rafamadriz/friendly-snippets',
 
 		},
- 	},
+    },
 
 	--Fugitive (pentru git tati)
 	{ 'tpope/vim-fugitive' },
@@ -87,5 +87,8 @@ require("lazy").setup({
 	{ 'mbbill/undotree' },
 
 	--Comment
-	{ 'numToStr/Comment.nvim', opts = {} }
+	{ 'numToStr/Comment.nvim', opts = {} },
+
+    --Indent blankline
+    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }
 })
