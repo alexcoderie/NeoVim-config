@@ -1,24 +1,19 @@
 return {
     "neovim/nvim-lspconfig",
+
     dependencies = {
         "stevearc/conform.nvim",
         "mason-org/mason.nvim",
         "mason-org/mason-lspconfig.nvim",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-cmdline",
-        "hrsh7th/nvim-cmp",
+        "saghen/blink.cmp",
         "L3MON4D3/LuaSnip",
-        "saadparwaiz1/cmp_luasnip",
         "j-hui/fidget.nvim",
         "folke/neodev.nvim",
+        "folke/lazydev.nvim",
     },
 
     config = function()
-        local cmp = require('cmp')
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+        local capabilities = require('blink.cmp').get_lsp_capabilities()
 
         local servers = {
             lua_ls = {
@@ -43,27 +38,6 @@ return {
                     }
                 end
             }
-        })
-
-        cmp.setup({
-            snippet = {
-                expand = function(args)
-                    require('luasnip').lsp_expand(args.body)
-                end,
-            },
-
-            mapping = cmp.mapping.preset.insert {
-                ['<C-n>'] = cmp.mapping.select_next_item(),
-                ['<C-p>'] = cmp.mapping.select_prev_item(),
-                ['<C-d>'] = cmp.mapping.scroll_docs(4),
-                ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-                ['<CR>'] = cmp.mapping.confirm({ select = true}),
-            },
-
-            sources = {
-                { name = 'nvim_lsp' },
-                { name = 'luasnip' },
-            },
         })
 
         vim.diagnostic.config({
@@ -107,7 +81,7 @@ return {
                 vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
 
                 local client = vim.lsp.get_client_by_id(event.data.client_id)
-                if client then
+                if client and client:supports_method('textDocument/documentHighlight', event.buf) then
                     local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
 
                     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' },{
