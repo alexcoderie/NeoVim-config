@@ -12,6 +12,7 @@ return {
         },
        { 'nvim-telescope/telescope-ui-select.nvim' },
        { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+       "andrew-george/telescope-themes",
     },
 
     config = function ()
@@ -26,9 +27,18 @@ return {
                 ['ui-select'] = {
                     require('telescope.themes').get_dropdown(),
                 },
+
+                ['themes'] = {
+                    enable_previewer = true,
+                    persist = {
+                        enabled = true,
+                        path = vim.fn.stdpath("config") .. "/lua/coderiu/current-colorscheme.lua"
+                    }
+                }
             },
         }
         pcall(require('telescope').load_extension, 'fzf')
+        require('telescope').load_extension('themes')
 
         local builtin = require('telescope.builtin')
         vim.keymap.set('n', '<leader>sf', builtin.find_files, {desc = '[S]earch [F]iles'})

@@ -1,15 +1,24 @@
 return {
-    "rose-pine/neovim",
-    name = "rose-pine",
-    config = function() 
-        require('rose-pine').setup({
-            styles = {
-                italic  = false,
-                transparency = false
-            },
-        })
+    {
+        "rose-pine/neovim",
+        name = "rose-pine",
+        config = function()
+            require('rose-pine').setup({
+                styles = {
+                    italic  = false,
+                    transparency = false
+                },
+            })
+        end
+    },
 
-    vim.cmd.colorscheme 'rose-pine'
+    {
+        "folke/tokyonight.nvim",
+        name = "tokyonight",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+    },
 
-    end
+    -- vim.cmd.colorscheme 'rose-pine'
 }
