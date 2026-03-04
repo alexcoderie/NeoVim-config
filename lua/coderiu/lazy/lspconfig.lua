@@ -78,7 +78,9 @@ return {
                 vim.keymap.set('n', 'grn', vim.lsp.buf.rename, opts)
                 vim.keymap.set('n', 'gI', require('telescope.builtin').lsp_implementations, opts)
                 vim.keymap.set({'n', 'v'}, '<leader>ca', vim.lsp.buf.code_action, opts)
-                vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+                vim.keymap.set('n', 'K', function()
+                    vim.lsp.buf.hover { border = "rounded", max_height = 25, max_width = 120 } 
+                end, { buffer = event.buf })
 
                 local client = vim.lsp.get_client_by_id(event.data.client_id)
                 if client and client:supports_method('textDocument/documentHighlight', event.buf) then
